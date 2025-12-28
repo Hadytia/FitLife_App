@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#008B8B"
+    android:padding="30dp">
+
+    <!-- App Logo/Name -->
+    <TextView
+        android:id="@+id/tv_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
+        android:text="FitLife"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        android:fontFamily="serif"
+        android:textStyle="italic"/>
+
+    <!-- Welcome Message Container -->
+    <LinearLayout
+        android:id="@+id/welcome_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!-- Welcome Text -->
+        <TextView
+            android:id="@+id/tv_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selamat Datang Hadytia,"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="30dp"/>
+
+        <!-- Question Text -->
+        <TextView
+            android:id="@+id/tv_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apakah Anda siap\nuntuk latihan?"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:gravity="center"
+            android:lineSpacingExtra="8dp"/>
+
+    </LinearLayout>
+
+    <!-- Buttons Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="2">
+
+        <!-- Button Keluar -->
+        <Button
+            android:id="@+id/btn_keluar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="10dp"
+            android:text="KELUAR"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:background="@drawable/btn_keluar_background"
+            android:textAllCaps="false"/>
+
+        <!-- Button Mulai -->
+        <Button
+            android:id="@+id/btn_mulai"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:text="MULAI"
+            android:textColor="#008B8B"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:background="@drawable/btn_mulai_background"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

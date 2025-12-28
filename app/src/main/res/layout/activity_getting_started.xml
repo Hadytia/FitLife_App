@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#008B8B"
+    android:padding="30dp">
+
+    <!-- App Logo/Name -->
+    <LinearLayout
+        android:id="@+id/logo_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FitLife"
+            android:textColor="#FFFFFF"
+            android:textSize="60sp"
+            android:fontFamily="serif"
+            android:textStyle="italic"
+            android:layout_marginBottom="20dp"/>
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/logo_fitlife_trans_low"
+            android:scaleType="fitCenter"/>
+
+    </LinearLayout>
+
+    <!-- Location Info Container -->
+    <LinearLayout
+        android:id="@+id/location_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tv_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome to FitLife!"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"/>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:indeterminateTint="#FFFFFF"
+            android:layout_marginBottom="15dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detecting your location..."
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp"/>
+
+    </LinearLayout>
+
+    <!-- Get Started Button -->
+    <Button
+        android:id="@+id/btn_get_started"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:text="Get Started"
+        android:textColor="#008B8B"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:background="@drawable/btn_background"
+        android:textAllCaps="false"
+        android:enabled="false"/>
+
+</RelativeLayout>

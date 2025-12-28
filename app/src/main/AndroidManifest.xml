@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.fitlife_app">
+
+    <!-- Location Permissions -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="FitLife"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        <!-- Getting Started Activity - LAUNCHER (Activity Pertama) -->
+        <activity
+            android:name=".GettingStartedActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Splash Screen - Bukan Launcher Lagi -->
+        <activity
+            android:name=".SplashActivity"
+            android:exported="false" />
+
+        <activity android:name=".WelcomeActivity" android:exported="false" />
+        <activity android:name=".ExerciseMenuActivity" android:exported="false" />
+
+        <activity android:name=".RunningActivity" android:exported="false" />
+        <activity android:name=".RunningCountdownActivity" android:exported="false" />
+
+        <activity android:name=".PushupActivity" android:exported="false" />
+        <activity android:name=".PushupCountdownActivity" android:exported="false" />
+
+        <activity android:name=".YogaActivity" android:exported="false" />
+        <activity android:name=".YogaCountdownActivity" android:exported="false" />
+
+        <activity android:name=".MainActivity" android:exported="false" />
+    </application>
+
+</manifest>

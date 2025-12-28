@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <!-- Dialog Card -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="25dp">
+
+            <!-- Close Button (X) -->
+            <TextView
+                android:id="@+id/btn_close_dialog"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:text="×"
+                android:textSize="28sp"
+                android:textColor="#666666"
+                android:gravity="center"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:visibility="gone"/>
+
+            <!-- Check Icon -->
+            <TextView
+                android:id="@+id/icon_check"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="✓"
+                android:textSize="40sp"
+                android:textColor="#4CAF50"
+                android:gravity="center"
+                android:background="@drawable/circle_check"
+                android:textStyle="bold"/>
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/tv_finished_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/icon_check"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:text="Workout finished!"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+
+            <!-- Message Text -->
+            <TextView
+                android:id="@+id/tv_finished_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_finished_title"
+                android:layout_marginTop="15dp"
+                android:text="Congratulations! You finished your push-up session strong."
+                android:textColor="#666666"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:lineSpacingExtra="4dp"/>
+
+            <!-- Buttons Container -->
+            <LinearLayout
+                android:id="@+id/buttons_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_finished_message"
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:weightSum="2">
+
+                <!-- Restart Button -->
+                <Button
+                    android:id="@+id/btn_dialog_restart"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="Mulai Ulang"
+                    android:textColor="#666666"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:background="@drawable/btn_dialog_back"
+                    android:textAllCaps="false"/>
+
+                <!-- Menu Button -->
+                <Button
+                    android:id="@+id/btn_dialog_menu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="Menu"
+                    android:textColor="#666666"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:background="@drawable/btn_dialog_start"
+                    android:textAllCaps="false"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
