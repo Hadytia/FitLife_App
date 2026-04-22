@@ -12,18 +12,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class RunningCountdownActivity extends AppCompatActivity {
 
     private String selectedLanguage;
-    private TextView tvTitle;
-    private TextView tvCountdown;
+    private TextView tvTitle, tvCountdown;
     private View circleBackground;
-    private Button btnBack;
-    private Button btnStart;
-    private Button btnRestart;
-    private Button btnMenu;
-
+    private Button btnBack, btnStart, btnRestart, btnMenu;
     private CountDownTimer countDownTimer;
     private boolean isCountdownRunning = false;
     private int currentCount = 5;
@@ -33,74 +29,35 @@ public class RunningCountdownActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_running_countdown);
 
-        // Ambil bahasa yang dipilih
         selectedLanguage = getIntent().getStringExtra("LANGUAGE");
-        if (selectedLanguage == null) {
-            selectedLanguage = "ID";
-        }
+        if (selectedLanguage == null) selectedLanguage = "ID";
 
-        // Inisialisasi views
-        tvTitle = findViewById(R.id.tv_countdown_title);
-        tvCountdown = findViewById(R.id.tv_countdown);
+        tvTitle          = findViewById(R.id.tv_countdown_title);
+        tvCountdown      = findViewById(R.id.tv_countdown);
         circleBackground = findViewById(R.id.circle_background);
-        btnBack = findViewById(R.id.btn_back);
-        btnStart = findViewById(R.id.btn_start);
-        btnRestart = findViewById(R.id.btn_restart);
-        btnMenu = findViewById(R.id.btn_menu);
+        btnBack          = findViewById(R.id.btn_back);
+        btnStart         = findViewById(R.id.btn_start);
+        btnRestart       = findViewById(R.id.btn_restart);
+        btnMenu          = findViewById(R.id.btn_menu);
 
-        // Set title berdasarkan bahasa
-        if (selectedLanguage.equals("ID")) {
-            tvTitle.setText("Berlari");
-        } else {
-            tvTitle.setText("Running");
-        }
-
-        // Set initial state
+        tvTitle.setText(selectedLanguage.equals("ID") ? "Berlari" : "Running");
         resetToInitialState();
 
-        // Button Back - kembali ke Running Instruction
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        btnBack   .setOnClickListener(v -> finish());
+        btnStart  .setOnClickListener(v -> startCountdown());
+        btnRestart.setOnClickListener(v -> resetCountdown());
+        btnMenu   .setOnClickListener(v -> goToMenu());
 
-        // Button Start - mulai countdown
-        btnStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startCountdown();
-            }
-        });
+        // FAB Coach AI
+        FloatingActionButton fabCoachAI = findViewById(R.id.fabCoachAI);
+        fabCoachAI.setOnClickListener(v ->
+                startActivity(new Intent(RunningCountdownActivity.this, ChatbotActivity.class))
+        );
 
-        // Button Restart - reset countdown ke 5
-        btnRestart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetCountdown();
-            }
-        });
-
-        // Button Menu - kembali ke Exercise Menu
-        btnMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RunningCountdownActivity.this, ExerciseMenuActivity.class);
-                intent.putExtra("LANGUAGE", selectedLanguage);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        // Handle back button
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if (isCountdownRunning && countDownTimer != null) {
-                    countDownTimer.cancel();
-                }
+                if (isCountdownRunning && countDownTimer != null) countDownTimer.cancel();
                 finish();
             }
         });
@@ -110,57 +67,45 @@ public class RunningCountdownActivity extends AppCompatActivity {
         currentCount = 5;
         tvCountdown.setText("05");
         circleBackground.setBackgroundResource(R.drawable.circle_green);
-
-        // Show Back and Start buttons
-        btnBack.setVisibility(View.VISIBLE);
-        btnStart.setVisibility(View.VISIBLE);
+        btnBack   .setVisibility(View.VISIBLE);
+        btnStart  .setVisibility(View.VISIBLE);
         btnRestart.setVisibility(View.GONE);
-        btnMenu.setVisibility(View.GONE);
-
+        btnMenu   .setVisibility(View.GONE);
         isCountdownRunning = false;
     }
 
     private void startCountdown() {
-        // Hide Back and Start, show only Restart
-        btnBack.setVisibility(View.GONE);
-        btnStart.setVisibility(View.GONE);
+        btnBack   .setVisibility(View.GONE);
+        btnStart  .setVisibility(View.GONE);
         btnRestart.setVisibility(View.VISIBLE);
-        btnMenu.setVisibility(View.GONE);
-
+        btnMenu   .setVisibility(View.GONE);
         isCountdownRunning = true;
 
         countDownTimer = new CountDownTimer(5000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                currentCount = (int) (millisUntilFinished / 1000);
+            @Override public void onTick(long ms) {
+                currentCount = (int) (ms / 1000);
                 tvCountdown.setText(String.format("%02d", currentCount));
             }
-
-            @Override
-            public void onFinish() {
-                currentCount = 0;
+            @Override public void onFinish() {
                 tvCountdown.setText("00");
-
-                // Change circle to red
                 circleBackground.setBackgroundResource(R.drawable.circle_red);
-
                 isCountdownRunning = false;
-
-                // Jeda 3 detik sebelum menampilkan dialog
-                new android.os.Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        showWorkoutFinishedDialog();
-                    }
-                }, 2000); // 2 detik
+                new android.os.Handler().postDelayed(() -> showWorkoutFinishedDialog(), 2000);
             }
         }.start();
     }
+
     private void resetCountdown() {
-        if (countDownTimer != null) {
-            countDownTimer.cancel();
-        }
+        if (countDownTimer != null) countDownTimer.cancel();
         resetToInitialState();
+    }
+
+    private void goToMenu() {
+        Intent intent = new Intent(this, ExerciseMenuActivity.class);
+        intent.putExtra("LANGUAGE", selectedLanguage);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 
     private void showWorkoutFinishedDialog() {
@@ -170,55 +115,28 @@ public class RunningCountdownActivity extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
 
-        TextView tvMessage = dialog.findViewById(R.id.tv_finished_message);
+        TextView tvMessage      = dialog.findViewById(R.id.tv_finished_message);
         Button btnDialogRestart = dialog.findViewById(R.id.btn_dialog_restart);
-        Button btnDialogMenu = dialog.findViewById(R.id.btn_dialog_menu);
+        Button btnDialogMenu    = dialog.findViewById(R.id.btn_dialog_menu);
 
-        // Set text berdasarkan bahasa
         if (selectedLanguage.equals("ID")) {
             tvMessage.setText("Latihan selesai!\n\nLuar biasa! Kamu berhasil lari dengan baik. Setiap langkah membawa lebih dekat ke tujuanmu!");
-        } else {
-            tvMessage.setText("Workout finished!\n\nAmazing! You crushed your running session. Every step brings you closer to your goals!");
-        }
-
-        if (selectedLanguage.equals("ID")) {
             btnDialogRestart.setText("Mulai Ulang");
             btnDialogMenu.setText("Menu");
         } else {
+            tvMessage.setText("Workout finished!\n\nAmazing! You crushed your running session. Every step brings you closer to your goals!");
             btnDialogRestart.setText("Restart");
             btnDialogMenu.setText("Menu");
         }
 
-        // Restart button - kembali ke countdown 5
-        btnDialogRestart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                resetCountdown();
-            }
-        });
-
-        // Menu button - kembali ke Exercise Menu
-        btnDialogMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                Intent intent = new Intent(RunningCountdownActivity.this, ExerciseMenuActivity.class);
-                intent.putExtra("LANGUAGE", selectedLanguage);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
-            }
-        });
-
+        btnDialogRestart.setOnClickListener(v -> { dialog.dismiss(); resetCountdown(); });
+        btnDialogMenu   .setOnClickListener(v -> { dialog.dismiss(); goToMenu(); });
         dialog.show();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (countDownTimer != null) {
-            countDownTimer.cancel();
-        }
+        if (countDownTimer != null) countDownTimer.cancel();
     }
 }

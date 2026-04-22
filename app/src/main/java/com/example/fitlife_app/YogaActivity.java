@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class YogaActivity extends AppCompatActivity {
 
@@ -22,46 +22,41 @@ public class YogaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yoga);
 
-        // Ambil bahasa yang dipilih
         selectedLanguage = getIntent().getStringExtra("LANGUAGE");
-        if (selectedLanguage == null) {
-            selectedLanguage = "ID";
-        }
+        if (selectedLanguage == null) selectedLanguage = "ID";
 
         tvTitle = findViewById(R.id.tv_yoga_title);
+        tvTitle.setText("Yoga");
 
-        // Set title berdasarkan bahasa
-        if (selectedLanguage.equals("ID")) {
-            tvTitle.setText("Yoga");
-        } else {
-            tvTitle.setText("Yoga");
-        }
-        // Handle back button dengan OnBackPressedDispatcher
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                finish(); // Kembali ke ExerciseMenuActivity
+                finish();
             }
         });
-        // Tampilkan dialog instruksi saat activity dibuka
+
+        // FAB Coach AI
+        FloatingActionButton fabCoachAI = findViewById(R.id.fabCoachAI);
+        fabCoachAI.setOnClickListener(v -> {
+            Intent intent = new Intent(YogaActivity.this, ChatbotActivity.class);
+            startActivity(intent);
+        });
+
         showInstructionDialog();
     }
 
     private void showInstructionDialog() {
-        // Buat dialog
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_yoga_instruction);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
 
-        // Inisialisasi views dalam dialog
         TextView tvDialogTitle = dialog.findViewById(R.id.tv_dialog_title);
         TextView tvInstruction = dialog.findViewById(R.id.tv_instruction);
-        Button btnBack = dialog.findViewById(R.id.btn_back_dialog);
-        Button btnStart = dialog.findViewById(R.id.btn_start_dialog);
+        Button btnBack         = dialog.findViewById(R.id.btn_back_dialog);
+        Button btnStart        = dialog.findViewById(R.id.btn_start_dialog);
 
-        // Set text berdasarkan bahasa
         if (selectedLanguage.equals("ID")) {
             tvDialogTitle.setText("Instruksi Yoga");
             tvInstruction.setText(
@@ -86,40 +81,23 @@ public class YogaActivity extends AppCompatActivity {
             btnStart.setText("Start");
         }
 
-        // Tombol Kembali/Back - kembali ke ExerciseMenu
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                finish(); // Kembali ke ExerciseMenuActivity
-            }
+        btnBack.setOnClickListener(v -> {
+            dialog.dismiss();
+            finish();
         });
 
-        // Tombol Mulai/Start - mulai yoga session
-        btnStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                // TODO: Mulai yoga session
-                startYogaSession();
-            }
+        btnStart.setOnClickListener(v -> {
+            dialog.dismiss();
+            startYogaSession();
         });
 
         dialog.show();
     }
 
     private void startYogaSession() {
-        // Pindah ke YogaCountdownActivity
         Intent intent = new Intent(YogaActivity.this, YogaCountdownActivity.class);
         intent.putExtra("LANGUAGE", selectedLanguage);
         startActivity(intent);
         finish();
     }
-
-//    @Override
-//    public void onBackPressed() {
-//        // Kembali ke ExerciseMenuActivity
-//        super.onBackPressed();
-//        finish();
-//    }
 }

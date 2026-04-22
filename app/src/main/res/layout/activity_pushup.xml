@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#008B8B"
@@ -18,7 +19,7 @@
         android:fontFamily="serif"
         android:textStyle="italic"/>
 
-    <!-- Message Text (akan muncul setelah Start) -->
+    <!-- Message Text -->
     <TextView
         android:id="@+id/tv_message"
         android:layout_width="wrap_content"
@@ -29,5 +30,38 @@
         android:textSize="20sp"
         android:textAlignment="center"
         android:visibility="gone"/>
+
+    <!-- FAB Label -->
+    <TextView
+        android:id="@+id/tvFabLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fab_coach_label"
+        android:textSize="11sp"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_bubble_user"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="24dp" />
+
+    <!-- FAB Coach AI -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabCoachAI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_bot_avatar"
+        android:contentDescription="@string/fab_coach_desc"
+        app:backgroundTint="@color/teal_primary"
+        app:tint="@color/white"
+        app:elevation="6dp" />
 
 </RelativeLayout>

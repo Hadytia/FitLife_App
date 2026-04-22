@@ -5,6 +5,9 @@ plugins {
 android {
     namespace = "com.example.fitlife_app"
     compileSdk = 36
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
         applicationId = "com.example.fitlife_app"
@@ -14,6 +17,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "GEMINI_API_KEY",
+            project.findProperty("GEMINI_API_KEY")?.toString() ?: "\"\"")
     }
 
     buildTypes {
@@ -46,4 +52,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    // HTTP Client untuk Gemini API
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+    // JSON Parser
+    implementation("com.google.code.gson:gson:2.10.1")
+
 }

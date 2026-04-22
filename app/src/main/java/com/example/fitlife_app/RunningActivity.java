@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class RunningActivity extends AppCompatActivity {
 
@@ -22,52 +22,47 @@ public class RunningActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_running);
 
-        // Ambil bahasa yang dipilih
         selectedLanguage = getIntent().getStringExtra("LANGUAGE");
-        if (selectedLanguage == null) {
-            selectedLanguage = "ID";
-        }
+        if (selectedLanguage == null) selectedLanguage = "ID";
 
         tvTitle = findViewById(R.id.tv_running_title);
+        tvTitle.setText(selectedLanguage.equals("ID") ? "Berlari" : "Running");
 
-        // Set title berdasarkan bahasa
-        if (selectedLanguage.equals("ID")) {
-            tvTitle.setText("Berlari");
-        } else {
-            tvTitle.setText("Running");
-        }
-        // Handle back button dengan OnBackPressedDispatcher
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                finish(); // Kembali ke ExerciseMenuActivity
+                finish();
             }
         });
-        // Tampilkan dialog instruksi saat activity dibuka
+
+        // FAB Coach AI
+        FloatingActionButton fabCoachAI = findViewById(R.id.fabCoachAI);
+        fabCoachAI.setOnClickListener(v -> {
+            Intent intent = new Intent(RunningActivity.this, ChatbotActivity.class);
+            startActivity(intent);
+        });
+
         showInstructionDialog();
     }
 
     private void showInstructionDialog() {
-        // Buat dialog
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_running_instruction);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
 
-        // Inisialisasi views dalam dialog
         TextView tvDialogTitle = dialog.findViewById(R.id.tv_dialog_title);
         TextView tvInstruction = dialog.findViewById(R.id.tv_instruction);
-        Button btnBack = dialog.findViewById(R.id.btn_back_dialog);
-        Button btnStart = dialog.findViewById(R.id.btn_start_dialog);
+        Button btnBack         = dialog.findViewById(R.id.btn_back_dialog);
+        Button btnStart        = dialog.findViewById(R.id.btn_start_dialog);
 
-        // Set text berdasarkan bahasa
         if (selectedLanguage.equals("ID")) {
             tvDialogTitle.setText("Instruksi Berlari");
             tvInstruction.setText(
                     "1. Awali dengan pemanasan berjalan kaki selama 2-3 menit.\n\n" +
                             "2. Jaga postur tubuh tetap tegak dan bahu rileks.\n\n" +
-                            "3.Endaratlah dengan posisi setengah kaki dan dorong dengan jari-jari kaki.\n\n" +
+                            "3. Endaratlah dengan posisi setengah kaki dan dorong dengan jari-jari kaki.\n\n" +
                             "4. Ayunkan lengan 90 derajat dan bernapaslah dengan teratur.\n\n" +
                             "5. Pendinginan dengan berjalan kaki perlahan."
             );
@@ -86,39 +81,23 @@ public class RunningActivity extends AppCompatActivity {
             btnStart.setText("Start");
         }
 
-        // Tombol Kembali/Back - kembali ke ExerciseMenu
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                finish(); // Kembali ke ExerciseMenuActivity
-            }
+        btnBack.setOnClickListener(v -> {
+            dialog.dismiss();
+            finish();
         });
 
-        // Tombol Mulai/Start - mulai tracking running
-        btnStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                // TODO: Mulai tracking running
-                startRunningTracking();
-            }
+        btnStart.setOnClickListener(v -> {
+            dialog.dismiss();
+            startRunningTracking();
         });
 
         dialog.show();
     }
 
     private void startRunningTracking() {
-        // Pindah ke RunningCountdownActivity
         Intent intent = new Intent(RunningActivity.this, RunningCountdownActivity.class);
         intent.putExtra("LANGUAGE", selectedLanguage);
         startActivity(intent);
         finish();
     }
-//    @Override
-//    public void onBackPressed() {
-//        // Kembali ke ExerciseMenuActivity
-//        super.onBackPressed();
-//        finish();
-//    }
 }
