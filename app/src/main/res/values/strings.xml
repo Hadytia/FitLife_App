@@ -12,12 +12,12 @@
     <string name="coach_ai_welcome_2">Tanya saya tentang latihan, nutrisi, atau pilih pertanyaan cepat di bawah. 💪</string>
 
     <!-- Quick Questions -->
-    <string name="quick_workout">Workout Plan</string>
-    <string name="quick_calories">Burn Calories</string>
-    <string name="quick_diet">Healthy Diet</string>
-    <string name="quick_sleep">Sleep &amp; Recovery</string>
-    <string name="quick_progress">Track Progress</string>
-    <string name="quick_heart">Heart Health</string>
+    <string name="quick_workout">🏋️ Workout Plan</string>
+    <string name="quick_calories">🔥 Burn Calories</string>
+    <string name="quick_diet">🥗 Healthy Diet</string>
+    <string name="quick_sleep">😴 Sleep &amp; Recovery</string>
+    <string name="quick_progress">📈 Track Progress</string>
+    <string name="quick_heart">❤️ Heart Health</string>
 
     <!-- FAB -->
     <string name="fab_coach_label">Coach AI</string>

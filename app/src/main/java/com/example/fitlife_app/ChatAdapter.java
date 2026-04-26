@@ -43,11 +43,21 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ChatMessage msg = messages.get(position);
         String time = timeFormat.format(new Date(msg.getTimestamp()));
+        
+        // Basic markdown parser for bold text (**text**)
+        CharSequence formattedMessage;
+        if (msg.getType() == ChatMessage.TYPE_BOT) {
+            String htmlText = msg.getMessage().replaceAll("\\*\\*(.*?)\\*\\*", "<b>$1</b>");
+            formattedMessage = android.text.Html.fromHtml(htmlText, android.text.Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            formattedMessage = msg.getMessage();
+        }
+
         if (holder instanceof BotViewHolder) {
-            ((BotViewHolder) holder).tvMessage.setText(msg.getMessage());
+            ((BotViewHolder) holder).tvMessage.setText(formattedMessage);
             ((BotViewHolder) holder).tvTime.setText(time);
         } else {
-            ((UserViewHolder) holder).tvMessage.setText(msg.getMessage());
+            ((UserViewHolder) holder).tvMessage.setText(formattedMessage);
             ((UserViewHolder) holder).tvTime.setText(time);
         }
     }

@@ -30,6 +30,7 @@
             android:name=".SplashActivity"
             android:exported="false" />
 
+
         <activity android:name=".WelcomeActivity" android:exported="false" />
         <activity android:name=".ExerciseMenuActivity" android:exported="false" />
 
@@ -45,6 +46,7 @@
         <activity android:name=".MainActivity" android:exported="false" />
 
         <activity android:name=".ChatbotActivity" android:exported="false" />
+
     </application>
 
 </manifest>

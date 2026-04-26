@@ -1,350 +1,284 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/chat_bg">
 
     <!-- HEADER -->
     <LinearLayout
         android:id="@+id/chatHeader"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="65dp"
         android:orientation="horizontal"
         android:background="@color/teal_primary"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:gravity="center_vertical"
-        android:elevation="4dp">
+        android:elevation="6dp"
+        android:outlineProvider="background">
 
-        <!-- Avatar lingkaran robot -->
         <FrameLayout
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginEnd="10dp">
-
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="12dp">
             <View
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@drawable/bg_avatar_circle"/>
-
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_robot"/>
-
         </FrameLayout>
 
-        <!-- Title & Subtitle -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/coach_ai_title"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="1dp">
-
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/coach_ai_title"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/coach_ai_badge"
+                    android:textColor="@color/white"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_chip"
+                    android:backgroundTint="#4D000000"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="6dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:layout_marginStart="8dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
                 <View
-                    android:layout_width="6dp"
-                    android:layout_height="6dp"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
                     android:background="@drawable/bg_online_dot"
-                    android:layout_marginEnd="4dp"/>
-
+                    android:layout_marginEnd="6dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/coach_ai_subtitle"
                     android:textColor="@color/header_subtitle"
-                    android:textSize="11sp"/>
-
+                    android:textSize="12sp"/>
             </LinearLayout>
-
         </LinearLayout>
 
-        <!-- AI Powered Badge -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/bg_ai_badge"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:gravity="center_vertical"
-            android:layout_marginEnd="8dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="✦"
-                android:textColor="#FFD700"
-                android:textSize="8sp"
-                android:layout_marginEnd="3dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="AI Powered"
-                android:textColor="@color/white"
-                android:textSize="10sp"/>
-
-        </LinearLayout>
-
-        <!-- Close Button -->
-        <FrameLayout
-            android:layout_width="30dp"
-            android:layout_height="30dp">
-
-            <View
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/bg_close_btn"/>
-
-            <ImageButton
-                android:id="@+id/btnClose"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@android:drawable/ic_menu_close_clear_cancel"
-                android:background="@android:color/transparent"
-                android:tint="@color/white"
-                android:contentDescription="Tutup"
-                android:padding="6dp"/>
-
-        </FrameLayout>
-
+        <ImageButton
+            android:id="@+id/btnClose"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="@color/white"
+            android:contentDescription="Tutup" />
     </LinearLayout>
 
     <!-- CHAT AREA -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChat"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:paddingTop="12dp"
-        android:paddingBottom="8dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomArea"
+        android:layout_below="@id/chatHeader"
         android:clipToPadding="false"
-        android:background="@color/chat_bg"/>
+        android:paddingBottom="16dp"
+        android:paddingTop="8dp"/>
 
-    <!-- QUICK QUESTIONS -->
+    <!-- BOTTOM AREA (Quick Questions + Input) -->
     <LinearLayout
-        android:id="@+id/layoutQuickQuestions"
+        android:id="@+id/bottomArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/chat_bg"
-        android:paddingStart="14dp"
-        android:paddingEnd="14dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="6dp">
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="QUICK QUESTIONS"
-            android:textSize="9sp"
-            android:textColor="@color/timestamp_text"
-            android:letterSpacing="0.12"
-            android:layout_marginBottom="8dp"/>
-
-        <!-- Row 1 — scrollable horizontal -->
-        <HorizontalScrollView
+        <!-- QUICK QUESTIONS -->
+        <LinearLayout
+            android:id="@+id/layoutQuickQuestions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="none"
-            android:layout_marginBottom="6dp">
+            android:orientation="vertical"
+            android:paddingBottom="12dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <HorizontalScrollView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:scrollbars="none"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:clipToPadding="false">
 
-                <TextView
-                    android:id="@+id/chipWorkout"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🏋️ Workout Plan"
-                    android:background="@drawable/bg_chip"
-                    android:textColor="@color/chip_text"
-                    android:textSize="12sp"
-                    android:paddingStart="14dp"
-                    android:paddingEnd="14dp"
-                    android:paddingTop="7dp"
-                    android:paddingBottom="7dp"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    android:focusable="true"/>
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/chipCalories"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🔥 Burn Calories"
-                    android:background="@drawable/bg_chip"
-                    android:textColor="@color/chip_text"
-                    android:textSize="12sp"
-                    android:paddingStart="14dp"
-                    android:paddingEnd="14dp"
-                    android:paddingTop="7dp"
-                    android:paddingBottom="7dp"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    android:focusable="true"/>
+                    <TextView
+                        android:id="@+id/chipWorkout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quick_workout"
+                        android:background="@drawable/bg_chip"
+                        android:textColor="@color/chip_text"
+                        android:textSize="13sp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:clickable="true"
+                        android:focusable="true"/>
 
-                <TextView
-                    android:id="@+id/chipDiet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🥗 Healthy Diet"
-                    android:background="@drawable/bg_chip"
-                    android:textColor="@color/chip_text"
-                    android:textSize="12sp"
-                    android:paddingStart="14dp"
-                    android:paddingEnd="14dp"
-                    android:paddingTop="7dp"
-                    android:paddingBottom="7dp"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    android:focusable="true"/>
+                    <TextView
+                        android:id="@+id/chipCalories"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quick_calories"
+                        android:background="@drawable/bg_chip"
+                        android:textColor="@color/chip_text"
+                        android:textSize="13sp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:clickable="true"
+                        android:focusable="true"/>
 
-            </LinearLayout>
-        </HorizontalScrollView>
+                    <TextView
+                        android:id="@+id/chipDiet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quick_diet"
+                        android:background="@drawable/bg_chip"
+                        android:textColor="@color/chip_text"
+                        android:textSize="13sp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:clickable="true"
+                        android:focusable="true"/>
 
-        <!-- Row 2 — scrollable horizontal -->
-        <HorizontalScrollView
+                    <TextView
+                        android:id="@+id/chipSleep"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quick_sleep"
+                        android:background="@drawable/bg_chip"
+                        android:textColor="@color/chip_text"
+                        android:textSize="13sp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:clickable="true"
+                        android:focusable="true"/>
+
+                    <TextView
+                        android:id="@+id/chipProgress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quick_progress"
+                        android:background="@drawable/bg_chip"
+                        android:textColor="@color/chip_text"
+                        android:textSize="13sp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:clickable="true"
+                        android:focusable="true"/>
+
+                    <TextView
+                        android:id="@+id/chipHeart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quick_heart"
+                        android:background="@drawable/bg_chip"
+                        android:textColor="@color/chip_text"
+                        android:textSize="13sp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:clickable="true"
+                        android:focusable="true"/>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+
+        <!-- INPUT BOX -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="none">
+            android:layout_margin="16dp"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="6dp"
+            app:cardBackgroundColor="@color/white">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="4dp"
+                android:gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/chipSleep"
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/etMessage"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="😴 Sleep &amp; Recovery"
-                    android:background="@drawable/bg_chip"
-                    android:textColor="@color/chip_text"
-                    android:textSize="12sp"
-                    android:paddingStart="14dp"
-                    android:paddingEnd="14dp"
-                    android:paddingTop="7dp"
-                    android:paddingBottom="7dp"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    android:focusable="true"/>
+                    android:layout_weight="1"
+                    android:hint="@string/coach_ai_hint"
+                    android:background="@android:color/transparent"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:textSize="15sp"
+                    android:maxLines="4"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:imeOptions="actionSend"/>
 
-                <TextView
-                    android:id="@+id/chipProgress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="📈 Track Progress"
-                    android:background="@drawable/bg_chip"
-                    android:textColor="@color/chip_text"
-                    android:textSize="12sp"
-                    android:paddingStart="14dp"
-                    android:paddingEnd="14dp"
-                    android:paddingTop="7dp"
-                    android:paddingBottom="7dp"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    android:focusable="true"/>
-
-                <TextView
-                    android:id="@+id/chipHeart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="❤️ Heart Health"
-                    android:background="@drawable/bg_chip"
-                    android:textColor="@color/chip_text"
-                    android:textSize="12sp"
-                    android:paddingStart="14dp"
-                    android:paddingEnd="14dp"
-                    android:paddingTop="7dp"
-                    android:paddingBottom="7dp"
-                    android:clickable="true"
-                    android:focusable="true"/>
+                <ImageButton
+                    android:id="@+id/btnSend"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_margin="2dp"
+                    android:src="@drawable/ic_send"
+                    android:background="@drawable/bg_send_btn"
+                    android:tint="@color/white"
+                    android:padding="12dp"
+                    android:contentDescription="Kirim" />
 
             </LinearLayout>
-        </HorizontalScrollView>
-
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
-    <!-- DIVIDER -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/divider"/>
-
-    <!-- INPUT AREA -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/chat_input_bg"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:gravity="center_vertical">
-
-        <EditText
-            android:id="@+id/etMessage"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/coach_ai_hint"
-            android:background="@drawable/bg_chat_input"
-            android:paddingStart="18dp"
-            android:paddingEnd="18dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:textSize="13sp"
-            android:maxLines="3"
-            android:inputType="textMultiLine"
-            android:imeOptions="actionSend"
-            android:layout_marginEnd="10dp"/>
-
-        <!-- Send button lingkaran -->
-        <FrameLayout
-            android:layout_width="44dp"
-            android:layout_height="44dp">
-
-            <View
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:background="@drawable/bg_send_btn"/>
-
-            <ImageButton
-                android:id="@+id/btnSend"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:src="@drawable/ic_send"
-                android:background="@android:color/transparent"
-                android:contentDescription="Kirim"
-                android:padding="12dp"/>
-
-        </FrameLayout>
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

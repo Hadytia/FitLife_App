@@ -18,8 +18,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "GEMINI_API_KEY",
-            project.findProperty("GEMINI_API_KEY")?.toString() ?: "\"\"")
+        buildConfigField("String", "GROQ_API_KEY",
+            project.findProperty("GROQ_API_KEY")?.toString() ?: "\"\"")
     }
 
     buildTypes {
@@ -53,7 +53,7 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-    // HTTP Client untuk Gemini API
+    // HTTP Client untuk Groq API
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
     // JSON Parser

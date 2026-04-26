@@ -6,7 +6,7 @@
     android:background="#008B8B"
     android:padding="20dp">
 
-    <!-- Back Button pojok kiri atas -->
+    <!-- Back Button Modern -->
     <ImageButton
         android:id="@+id/btnBack"
         android:layout_width="40dp"
@@ -14,11 +14,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="36dp"
-        android:src="@android:drawable/ic_media_previous"
-        android:background="@drawable/bg_close_btn"
-        android:tint="#FFFFFF"
-        android:padding="8dp"
-        android:contentDescription="Kembali"/>
+        android:src="@drawable/ic_back_modern"
+        android:background="@drawable/bg_back_btn"
+        android:contentDescription="Kembali"
+        android:padding="10dp"/>
 
     <!-- App Title -->
     <TextView
