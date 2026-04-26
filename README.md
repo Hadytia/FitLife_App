@@ -29,3 +29,6 @@ Interface chatbot dirancang menyerupai aplikasi messaging premium:
 • Networking: OkHttp3 untuk Groq API.
 • UI Framework: Android Material Components.
 • AI Engine: Groq SDK (Llama 3.1 Model).
+
+Link Scrum Excel Timeline FitLife Apps - 312410358_Hadytia Kuswantoro :
+=> https://drive.google.com/drive/folders/1VJxIrUMZ6TDKUKznjFpbalV6n4QMKB7J?usp=sharing
