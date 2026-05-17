@@ -1,5 +1,7 @@
 package com.example.fitlife_app;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,16 +17,39 @@ public class GroqClient {
     private final OkHttpClient httpClient;
     private final String apiKey;
     private final JSONArray chatHistory;
+    private final Context context;
 
     public interface GroqCallback {
         void onSuccess(String response);
         void onError(String error);
     }
 
-    public GroqClient() {
+    public GroqClient(Context context) {
+        this.context = context;
         this.httpClient = new OkHttpClient();
         this.apiKey = BuildConfig.GROQ_API_KEY;
         this.chatHistory = new JSONArray();
+    }
+
+    private String getSystemPrompt() {
+        SharedPreferences prefs = context.getSharedPreferences("FitLifeProfile", Context.MODE_PRIVATE);
+        String name = prefs.getString("name", "User");
+        String age = prefs.getString("age", "-");
+        String weight = prefs.getString("weight", "-");
+        String height = prefs.getString("height", "-");
+        String goal = prefs.getString("goal", "Kebugaran Umum");
+
+        return "Kamu adalah FitLife AI Coach, asisten fitness pribadi yang ramah. " +
+                "Selalu jawab dalam Bahasa Indonesia. Berikan saran latihan, nutrisi, dan motivasi yang helpful dan spesifik. " +
+                "Konteks Pengguna saat ini: " +
+                "Nama: " + name + ", " +
+                "Umur: " + age + " tahun, " +
+                "Berat: " + weight + " kg, " +
+                "Tinggi: " + height + " cm, " +
+                "Target Fitness: " + goal + ". " +
+                "Gunakan data ini untuk memberikan jawaban yang dipersonalisasi. Sapa pengguna dengan namanya sesekali. " +
+                "PENTING: Gunakan format yang rapi. Gunakan baris baru (newline) untuk setiap poin atau langkah. " +
+                "Jangan menulis poin-poin dalam satu paragraf panjang.";
     }
 
     public void sendMessage(String userMessage, GroqCallback callback) {
@@ -34,27 +59,23 @@ public class GroqClient {
         }
 
         try {
-            // Build messages array
             JSONArray messages = new JSONArray();
 
-            // System message
+            // Dynamic System message with Profile Context
             JSONObject systemMsg = new JSONObject();
             systemMsg.put("role", "system");
-            systemMsg.put("content", "Kamu adalah FitLife AI Coach, asisten fitness pribadi yang ramah. Selalu jawab dalam Bahasa Indonesia. Berikan saran latihan, nutrisi, dan motivasi yang helpful dan spesifik.");
+            systemMsg.put("content", getSystemPrompt());
             messages.put(systemMsg);
 
-            // Add chat history
             for (int i = 0; i < chatHistory.length(); i++) {
                 messages.put(chatHistory.get(i));
             }
 
-            // Add current user message
             JSONObject userMsg = new JSONObject();
             userMsg.put("role", "user");
             userMsg.put("content", userMessage);
             messages.put(userMsg);
 
-            // Build request body
             JSONObject requestBody = new JSONObject();
             requestBody.put("model", MODEL);
             requestBody.put("messages", messages);
@@ -73,7 +94,7 @@ public class GroqClient {
                     .post(body)
                     .build();
 
-            Log.d(TAG, "Calling Groq API...");
+            Log.d(TAG, "Calling Groq API with Profile Context...");
 
             httpClient.newCall(request).enqueue(new Callback() {
                 @Override
@@ -99,7 +120,6 @@ public class GroqClient {
                                 .getJSONObject("message")
                                 .getString("content");
 
-                        // Update history
                         JSONObject userHistory = new JSONObject();
                         userHistory.put("role", "user");
                         userHistory.put("content", userMessage);

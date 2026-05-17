@@ -19,6 +19,9 @@ public class ExerciseMenuActivity extends AppCompatActivity {
     private TextView tvPushupTitle, tvPushupDesc;
     private TextView tvYogaTitle, tvYogaDesc;
 
+    // Dashboard Views
+    private TextView tvBmiValue, tvHealthStatus, tvUserGoal;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +41,18 @@ public class ExerciseMenuActivity extends AppCompatActivity {
         tvYogaTitle    = findViewById(R.id.tv_yoga_title);
         tvYogaDesc     = findViewById(R.id.tv_yoga_desc);
 
+        // Dashboard Init
+        tvBmiValue     = findViewById(R.id.tv_bmi_value);
+        tvHealthStatus = findViewById(R.id.tv_health_status);
+        tvUserGoal     = findViewById(R.id.tv_user_goal);
+
+        findViewById(R.id.dashboard_card).setOnClickListener(v -> {
+            startActivity(new Intent(this, ProfileListActivity.class));
+        });
+
         setLanguage();
         setupCardListeners();
+        updateDashboard();
 
         // Back button
         ImageButton btnBack = findViewById(R.id.btnBack);
@@ -51,7 +64,14 @@ public class ExerciseMenuActivity extends AppCompatActivity {
         fabCoachAI.startAnimation(pulse);
         fabCoachAI.setOnClickListener(v -> {
             fabCoachAI.clearAnimation();
-            startActivity(new Intent(ExerciseMenuActivity.this, ChatbotActivity.class));
+            
+            // Cek apakah profil sudah diisi
+            android.content.SharedPreferences prefs = getSharedPreferences("FitLifeProfile", MODE_PRIVATE);
+            if (prefs.getString("name", "").isEmpty()) {
+                startActivity(new Intent(ExerciseMenuActivity.this, ProfileListActivity.class));
+            } else {
+                startActivity(new Intent(ExerciseMenuActivity.this, ChatbotActivity.class));
+            }
         });
     }
 
@@ -62,6 +82,41 @@ public class ExerciseMenuActivity extends AppCompatActivity {
         FloatingActionButton fabCoachAI = findViewById(R.id.fabCoachAI);
         Animation pulse = AnimationUtils.loadAnimation(this, R.anim.pulse);
         fabCoachAI.startAnimation(pulse);
+        updateDashboard();
+    }
+
+    private void updateDashboard() {
+        android.content.SharedPreferences prefs = getSharedPreferences("FitLifeProfile", MODE_PRIVATE);
+        String name = prefs.getString("name", "");
+        
+        if (name.isEmpty()) {
+            tvBmiValue.setText("--");
+            tvHealthStatus.setText(getString(R.string.health_status_empty));
+            tvUserGoal.setText(getString(R.string.click_to_start));
+            return;
+        }
+
+        try {
+            float weight = Float.parseFloat(prefs.getString("weight", "0"));
+            float height = Float.parseFloat(prefs.getString("height", "0")) / 100; // cm to m
+            String goal = prefs.getString("goal", "-");
+
+            if (height > 0) {
+                float bmi = weight / (height * height);
+                tvBmiValue.setText(String.format("%.1f", bmi));
+                tvHealthStatus.setText(getBmiCategory(bmi));
+                tvUserGoal.setText(getString(R.string.user_goal_prefix, goal));
+            }
+        } catch (Exception e) {
+            tvBmiValue.setText("ERR");
+        }
+    }
+
+    private String getBmiCategory(float bmi) {
+        if (bmi < 18.5) return getString(R.string.health_status_underweight);
+        if (bmi < 25) return getString(R.string.health_status_ideal);
+        if (bmi < 30) return getString(R.string.health_status_overweight);
+        return getString(R.string.health_status_obese);
     }
 
     @Override

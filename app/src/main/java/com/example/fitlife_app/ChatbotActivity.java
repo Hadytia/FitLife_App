@@ -48,7 +48,7 @@ public class ChatbotActivity extends AppCompatActivity {
     private void initChat() {
         messageList  = new ArrayList<>();
         chatAdapter  = new ChatAdapter(messageList);
-        groqClient   = new GroqClient();
+        groqClient   = new GroqClient(this);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setStackFromEnd(true);
@@ -149,9 +149,11 @@ public class ChatbotActivity extends AppCompatActivity {
 
     private String formatResponse(String response) {
         return response
-                .replaceAll("\\*\\*(.*?)\\*\\*", "$1")
-                .replaceAll("\\*(.*?)\\*", "$1")
-                .replaceAll("#{1,6}\\s", "")
+                .replaceAll("\\*\\*(.*?)\\*\\*", "$1") // Hapus Bold
+                .replaceAll("\\*(.*?)\\*", "$1")       // Hapus Italic
+                .replaceAll("#{1,6}\\s", "")           // Hapus Header Markdown
+                .replaceAll("(\\d+\\.)", "\n$1")       // Paksa baris baru sebelum angka daftar (1., 2., dst)
+                .replaceAll("\\n+", "\n")              // Hapus baris kosong berlebih
                 .trim();
     }
 }

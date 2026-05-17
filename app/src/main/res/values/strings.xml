@@ -23,6 +23,65 @@
     <string name="fab_coach_label">Coach AI</string>
     <string name="fab_coach_desc">Buka AI Coach</string>
 
+    <!-- Fitness Goals -->
+    <string-array name="fitness_goals">
+        <item>Menurunkan Berat Badan</item>
+        <item>Membentuk Otot (Bulking)</item>
+        <item>Menjaga Kebugaran</item>
+        <item>Meningkatkan Stamina</item>
+    </string-array>
+
+    <!-- Dashboard -->
+    <string name="bmi_label">BMI (Index Massa Tubuh)</string>
+    <string name="health_status_loading">Memuat data...</string>
+    <string name="health_status_empty">Profil belum diisi</string>
+    <string name="health_status_ideal">Normal (Ideal)</string>
+    <string name="health_status_underweight">Kurus (Underweight)</string>
+    <string name="health_status_overweight">Gemuk (Overweight)</string>
+    <string name="health_status_obese">Obesitas</string>
+    <string name="user_goal_prefix">Target: %s</string>
+    <string name="click_to_start">Klik Coach AI untuk mulai</string>
+
+    <!-- Profile -->
+    <string name="profile_header">Profil Kesehatan</string>
+    <string name="profile_sub_header">Bantu Coach AI mengenal kamu lebih dekat</string>
+    <string name="full_name">Nama Lengkap</string>
+    <string name="name_hint">Siapa nama kamu?</string>
+    <string name="age">Umur</string>
+    <string name="age_hint">Thn</string>
+    <string name="weight">Berat (kg)</string>
+    <string name="height">Tinggi (cm)</string>
+    <string name="fitness_goal">Target Fitness</string>
+    <string name="save_changes">Simpan Perubahan</string>
+    <string name="update_profile">Update Profil</string>
+    <string name="fill_all_data">Mohon lengkapi semua data ya!</string>
+    <string name="profile_saved">Profil berhasil disimpan!</string>
+
+    <!-- Profile List -->
+    <string name="select_profile">Pilih Profil</string>
+    <string name="add_new_profile">+ Tambah Profil Baru</string>
+    <string name="target_prefix">Target: %s</string>
+
+    <!-- Running Tracker -->
+    <string name="run_ready">Siap Lari?</string>
+    <string name="run_active">Sedang Berlari...</string>
+    <string name="run_steps_format">%1$d Langkah | %2$.2f km</string>
+    <string name="btn_stop">BERHENTI</string>
+    <string name="btn_start">MULAI</string>
+
+    <!-- Yoga Flow -->
+    <string name="yoga_pose_1">Pose Gunung</string>
+    <string name="yoga_pose_2">Pose Anak</string>
+    <string name="yoga_pose_3">Pose Kobra</string>
+    <string name="yoga_pose_4">Savasana</string>
+    <string name="inhale">Tarik Napas</string>
+    <string name="exhale">Buang Napas</string>
+    <string name="pose_progress">Pose %1$d dari %2$d</string>
+
+    <string name="btn_back">KEMBALI</string>
+    <string name="steps_label">LANGKAH</string>
+    <string name="time_label">WAKTU</string>
+
     <!-- Error messages -->
     <string name="error_network">Koneksi gagal. Periksa internet kamu ya!</string>
     <string name="error_api">Gagal memproses respons AI.</string>

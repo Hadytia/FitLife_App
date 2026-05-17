@@ -33,13 +33,86 @@
         android:fontFamily="serif"
         android:textStyle="italic"/>
 
+    <!-- DASHBOARD CARD -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/dashboard_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_app_title"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20dp"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_bmi_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textColor="@color/teal_primary"
+                    android:textSize="28sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bmi_label"
+                    android:textSize="12sp"
+                    android:textColor="#757575"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="#EEEEEE"
+                android:layout_marginHorizontal="15dp"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_health_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/health_status_loading"
+                    android:textColor="#424242"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tv_user_goal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Target: -"
+                    android:textSize="12sp"
+                    android:textColor="#00897B"
+                    android:textStyle="italic"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
     <!-- Menu Container Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/menu_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_app_title"
-        android:layout_marginTop="30dp"
+        android:layout_below="@id/dashboard_card"
+        android:layout_marginTop="20dp"
         app:cardBackgroundColor="#0A5F5F"
         app:cardCornerRadius="20dp"
         app:cardElevation="8dp">
@@ -289,7 +362,7 @@
             android:id="@+id/tvFabLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Coach AI"
+            android:text="@string/fab_coach_label"
             android:textSize="10sp"
             android:textColor="#FFFFFF"
             android:textStyle="bold"

@@ -52,21 +52,23 @@ public class WelcomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(WelcomeActivity.this, ExerciseMenuActivity.class);
                 intent.putExtra("LANGUAGE", selectedLanguage);
                 startActivity(intent);
-                finish();
             }
         });
     }
 
     private void setLanguage() {
+        android.content.SharedPreferences prefs = getSharedPreferences("FitLifeProfile", MODE_PRIVATE);
+        String activeName = prefs.getString("name", "User");
+
         if (selectedLanguage.equals("ID")) {
             // Bahasa Indonesia
-            tvWelcome.setText("Selamat Datang Hadytia,");
+            tvWelcome.setText("Selamat Datang " + activeName + ",");
             tvQuestion.setText("Apakah Anda siap\nuntuk latihan?");
             btnKeluar.setText("KELUAR");
             btnMulai.setText("MULAI");
         } else {
             // Bahasa Inggris
-            tvWelcome.setText("Welcome Hadytia,");
+            tvWelcome.setText("Welcome " + activeName + ",");
             tvQuestion.setText("Are you ready for\nyour excercise?");
             btnKeluar.setText("EXIT");
             btnMulai.setText("START");
