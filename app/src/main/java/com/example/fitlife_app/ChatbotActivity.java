@@ -148,12 +148,49 @@ public class ChatbotActivity extends AppCompatActivity {
     }
 
     private String formatResponse(String response) {
-        return response
-                .replaceAll("\\*\\*(.*?)\\*\\*", "$1") // Hapus Bold
-                .replaceAll("\\*(.*?)\\*", "$1")       // Hapus Italic
-                .replaceAll("#{1,6}\\s", "")           // Hapus Header Markdown
-                .replaceAll("(\\d+\\.)", "\n$1")       // Paksa baris baru sebelum angka daftar (1., 2., dst)
-                .replaceAll("\\n+", "\n")              // Hapus baris kosong berlebih
-                .trim();
+        if (response == null) return "";
+        
+        String[] lines = response.split("\n");
+        StringBuilder sb = new StringBuilder();
+        
+        for (String line : lines) {
+            String trimmed = line.trim();
+            if (trimmed.isEmpty()) {
+                sb.append("<br/>");
+                continue;
+            }
+            
+            // Translate bullet lists
+            if (trimmed.startsWith("- ") || trimmed.startsWith("* ") || trimmed.startsWith("• ")) {
+                String content = trimmed.substring(2);
+                sb.append("• ").append(content).append("<br/>");
+            }
+            // Translate numbered lists (check pattern e.g. "1. ")
+            else if (trimmed.matches("^\\d+\\.\\s+.*")) {
+                sb.append(trimmed).append("<br/>");
+            }
+            // Translate headers
+            else if (trimmed.startsWith("### ")) {
+                sb.append("<br/><b>").append(trimmed.substring(4)).append("</b><br/>");
+            } else if (trimmed.startsWith("## ")) {
+                sb.append("<br/><b>").append(trimmed.substring(3)).append("</b><br/>");
+            } else if (trimmed.startsWith("# ")) {
+                sb.append("<br/><b>").append(trimmed.substring(2)).append("</b><br/>");
+            }
+            // Regular line
+            else {
+                sb.append(trimmed).append("<br/>");
+            }
+        }
+        
+        String result = sb.toString();
+        // Replace bold markdown with HTML <b>
+        result = result.replaceAll("\\*\\*(.*?)\\*\\*", "<b>$1</b>");
+        result = result.replaceAll("__(.*?)__", "<b>$1</b>");
+        // Replace italic markdown with HTML <i>
+        result = result.replaceAll("\\*(.*?)\\*", "<i>$1</i>");
+        result = result.replaceAll("_(.*?)_", "<i>$1</i>");
+        
+        return result.trim();
     }
 }

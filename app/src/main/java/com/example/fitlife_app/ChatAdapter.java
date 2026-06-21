@@ -44,11 +44,10 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ChatMessage msg = messages.get(position);
         String time = timeFormat.format(new Date(msg.getTimestamp()));
         
-        // Basic markdown parser for bold text (**text**)
+        // Basic HTML text rendering
         CharSequence formattedMessage;
         if (msg.getType() == ChatMessage.TYPE_BOT) {
-            String htmlText = msg.getMessage().replaceAll("\\*\\*(.*?)\\*\\*", "<b>$1</b>");
-            formattedMessage = android.text.Html.fromHtml(htmlText, android.text.Html.FROM_HTML_MODE_LEGACY);
+            formattedMessage = android.text.Html.fromHtml(msg.getMessage(), android.text.Html.FROM_HTML_MODE_LEGACY);
         } else {
             formattedMessage = msg.getMessage();
         }

@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FitLife</title>
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app" class="app-container">
+
+      <!-- ================= SPLASH VIEW (activity_splash.xml) ================= -->
+      <div id="view-splash" class="view active splash-bg">
+        <div class="splash-layout">
+          <!-- Select Language Section -->
+          <div class="language-selector">
+            <p class="select-lang-text">Select Language</p>
+            <div class="lang-row">
+              <!-- Indonesian Flag -->
+              <div id="lang-id" class="lang-item active">
+                <span class="flag-img">🇮🇩</span>
+                <span class="lang-code" id="text-id">ID</span>
+              </div>
+              
+              <!-- English Flag -->
+              <div id="lang-en" class="lang-item">
+                <span class="flag-img">🇺🇸</span>
+                <span class="lang-code" id="text-en">EN</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Logo and App Name -->
+          <div class="logo-box">
+            <h1 class="app-brand-title">FitLife</h1>
+            <!-- Fitness icon instead of drawable image -->
+            <div class="app-logo-vector">
+              <svg viewBox="0 0 100 100" class="logo-svg">
+                <circle cx="50" cy="50" r="40" stroke="white" stroke-width="4" fill="none" opacity="0.3"/>
+                <path d="M30,50 L45,65 L70,35" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Button Continue -->
+          <button id="btn-splash-continue" class="btn-splash-continue">Continue</button>
+        </div>
+      </div>
+
+      <!-- ================= WELCOME VIEW (activity_welcome.xml) ================= -->
+      <div id="view-welcome" class="view hidden splash-bg welcome-padding">
+        <div class="welcome-layout">
+          <!-- App Logo/Name -->
+          <h1 class="app-brand-title left-align">FitLife</h1>
+          
+          <!-- Welcome Message Container -->
+          <div class="welcome-message-box">
+            <h2 id="tv-welcome" class="welcome-user-text">Selamat Datang Hadytia,</h2>
+            <p id="tv-question" class="welcome-question-text">Apakah Anda siap<br>untuk latihan?</p>
+          </div>
+          
+          <!-- Buttons Container -->
+          <div class="welcome-btn-row">
+            <button id="btn-welcome-exit" class="btn-keluar">KELUAR</button>
+            <button id="btn-welcome-start" class="btn-mulai">MULAI</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= EXERCISE MENU VIEW (activity_exercise_menu.xml) ================= -->
+      <div id="view-exercise-menu" class="view hidden splash-bg menu-padding">
+        <!-- Header area -->
+        <div class="menu-header">
+          <!-- Back button circular -->
+          <button id="btn-menu-back" class="btn-back-modern">←</button>
+          <!-- App Title -->
+          <h1 class="app-brand-title-small">FitLife</h1>
+          <div style="width: 40px;"></div>
+        </div>
+
+        <!-- DASHBOARD CARD -->
+        <div id="dashboard-card" class="dashboard-card-white">
+          <div class="db-bmi-section">
+            <span id="tv-bmi-value" class="db-bmi-val-text">--</span>
+            <span class="db-bmi-lbl">BMI</span>
+          </div>
+          
+          <div class="db-divider"></div>
+          
+          <div class="db-status-section">
+            <span id="tv-health-status" class="db-health-status-text">Memuat status...</span>
+            <span id="tv-user-goal" class="db-user-goal-text">Target: -</span>
+          </div>
+        </div>
+
+        <!-- Menu Container Card -->
+        <div class="menu-container-card">
+          <h2 id="tv-menu-title" class="menu-card-title">Menu Latihan</h2>
+          <div class="menu-divider-white"></div>
+
+          <!-- Running Card -->
+          <div id="card-running" class="menu-exercise-row">
+            <span class="exercise-star">☆</span>
+            <div class="exercise-row-info">
+              <h3 id="tv-running-title" class="exercise-row-title">Berlari</h3>
+              <p id="tv-running-desc" class="exercise-row-desc">Lacak jarak lari, waktu, dan kalori yang terbakar. Tetap termotivasi dengan informasi perkembangan dan target harian.</p>
+            </div>
+            <span class="exercise-arrow">⇄</span>
+          </div>
+
+          <!-- Push-up Card -->
+          <div id="card-pushup" class="menu-exercise-row">
+            <span class="exercise-star">☆</span>
+            <div class="exercise-row-info">
+              <h3 id="tv-pushup-title" class="exercise-row-title">Push-up</h3>
+              <p id="tv-pushup-desc" class="exercise-row-desc">Hitung push-up Anda, pantau setnya, dan pantau kalori yang terbakar. Bangun kekuatan tubuh bagian atas selangkah demi selangkah.</p>
+            </div>
+            <span class="exercise-arrow">⇄</span>
+          </div>
+
+          <!-- Yoga Card -->
+          <div id="card-yoga" class="menu-exercise-row no-border">
+            <span class="exercise-star">☆</span>
+            <div class="exercise-row-info">
+              <h3 id="tv-yoga-title" class="exercise-row-title">Yoga</h3>
+              <p id="tv-yoga-desc" class="exercise-row-desc">Ikuti sesi yoga terpandu, tingkatkan fleksibilitas, dan rilekskan pikiran Anda dengan rutinitas yang menenangkan.</p>
+            </div>
+            <span class="exercise-arrow">⇄</span>
+          </div>
+        </div>
+
+        <!-- FAB + Label Wrapper -->
+        <div class="fab-wrapper" id="fab-coach-ai">
+          <!-- FAB Coach AI -->
+          <button class="fab-coach-ai-modern">
+            <span class="fab-avatar-icon">🤖</span>
+          </button>
+          <!-- Label Coach AI below FAB -->
+          <span id="tvFabLabel" class="fab-label-text">COACH AI</span>
+        </div>
+      </div>
+
+      <!-- ================= PROFILE LIST VIEW (activity_profile_list.xml) ================= -->
+      <div id="view-profile-list" class="view hidden chat-bg-color padding-20">
+        <div class="menu-header" style="margin-top: 0; flex-shrink: 0;">
+          <button id="btn-profile-list-back" class="btn-back-modern">←</button>
+          <h2 id="tv_title_profile_list" class="profile-list-header-text" style="margin: 0; font-size: 24px;">Pilih Profil</h2>
+          <div style="width: 40px;"></div>
+        </div>
+        
+        <div class="profile-list-scrollable">
+          <div id="profile-list-container" class="profile-cards-container">
+            <!-- Dynamic profile card items matching item_profile.xml -->
+          </div>
+        </div>
+
+        <button id="btn-add-profile" class="btn-add-new-profile">TAMBAH PROFIL BARU</button>
+      </div>
+
+      <!-- ================= PROFILE FORM VIEW (activity_profile.xml) ================= -->
+      <div id="view-profile-form" class="view hidden profile-bg-white padding-24">
+        <!-- Profile Header -->
+        <div class="profile-header-container">
+          <h2 id="tv-profile-header" class="profile-header-title">Profil Pengguna</h2>
+          <p id="tv-profile-subheader" class="profile-subheader-desc">Silakan lengkapi data tubuh Anda</p>
+        </div>
+
+        <!-- Scrollable Form fields -->
+        <form id="profile-form" class="profile-form-layout">
+          <!-- Name Input -->
+          <div class="form-group-xml">
+            <label class="form-label-xml" for="et-name" id="lbl-full-name">NAMA LENGKAP</label>
+            <input type="text" id="et-name" required placeholder="Masukkan nama Anda" class="bg-input-field-xml">
+          </div>
+
+          <!-- Horizontal Row for Age, Weight, Height -->
+          <div class="form-row-xml">
+            <!-- Age -->
+            <div class="form-group-xml col-3">
+              <label class="form-label-xml" for="et-age">UMUR</label>
+              <input type="number" id="et-age" required min="1" max="120" placeholder="thn" class="bg-input-field-xml center-text">
+            </div>
+            <!-- Weight -->
+            <div class="form-group-xml col-3">
+              <label class="form-label-xml" for="et-weight">BERAT</label>
+              <input type="number" id="et-weight" required min="10" max="300" placeholder="kg" class="bg-input-field-xml center-text">
+            </div>
+            <!-- Height -->
+            <div class="form-group-xml col-3">
+              <label class="form-label-xml" for="et-height">TINGGI</label>
+              <input type="number" id="et-height" required min="50" max="250" placeholder="cm" class="bg-input-field-xml center-text">
+            </div>
+          </div>
+
+          <!-- Goal Selection -->
+          <div class="form-group-xml">
+            <label class="form-label-xml" for="spinner-goal">TARGET FITNES</label>
+            <div class="spinner-card-view-xml">
+              <select id="spinner-goal" class="spinner-select-xml">
+                <option value="Menurunkan Berat Badan">Menurunkan Berat Badan</option>
+                <option value="Menjaga Kebugaran">Menjaga Kebugaran</option>
+                <option value="Menambah Massa Otot">Menambah Massa Otot</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="height: 30px;"></div>
+
+          <button type="submit" id="btn-profile-save" class="btn-save-profile-xml">SIMPAN PERUBAHAN</button>
+          <button type="button" id="btn-profile-form-back" class="btn-cancel-profile-xml">KEMBALI</button>
+        </form>
+      </div>
+
+      <!-- ================= CHATBOT VIEW (activity_chatbot.xml) ================= -->
+      <div id="view-chatbot" class="view hidden chat-bg-color no-padding">
+        <!-- HEADER -->
+        <header class="chat-header-xml">
+          <div class="chat-avatar-frame-xml">
+            <div class="chat-avatar-circle-xml"></div>
+            <!-- Robot emoji scaled -->
+            <span class="chat-avatar-emoji-xml">🤖</span>
+          </div>
+
+          <div class="chat-header-text-xml">
+            <div class="chat-title-row-xml">
+              <span class="chat-title-xml">Coach AI</span>
+              <span class="chat-badge-xml">AI COACH</span>
+            </div>
+            <div class="chat-status-row-xml">
+              <span class="chat-online-dot-xml"></span>
+              <span class="chat-status-text-xml">Aktif</span>
+            </div>
+          </div>
+
+          <button id="btn-chat-close" class="btn-chat-close-xml">✕</button>
+        </header>
+
+        <!-- CHAT AREA -->
+        <div id="chat-messages" class="chat-messages-xml">
+          <!-- Dynamic bubbles populated matching item_chat_bot.xml and item_chat_user.xml -->
+        </div>
+
+        <!-- BOTTOM AREA (Quick Questions + Input) -->
+        <div class="chat-bottom-area-xml">
+          <!-- QUICK QUESTIONS -->
+          <div id="layout-quick-questions" class="quick-questions-scroll-xml">
+            <div class="quick-chips-row-xml">
+              <span class="quick-chip-xml" id="chipWorkout" data-question="Buatkan program workout plan untuk pemula">📋 Workout Plan</span>
+              <span class="quick-chip-xml" id="chipCalories" data-question="Bagaimana cara membakar kalori dengan efektif?">🔥 Bakar Kalori</span>
+              <span class="quick-chip-xml" id="chipDiet" data-question="Berikan tips healthy diet untuk mendukung olahraga">🥗 Healthy Diet</span>
+              <span class="quick-chip-xml" id="chipSleep" data-question="Berapa lama waktu tidur dan recovery yang ideal?">😴 Tidur & Recovery</span>
+              <span class="quick-chip-xml" id="chipProgress" data-question="Bagaimana cara track progress latihan yang benar?">📈 Track Progress</span>
+              <span class="quick-chip-xml" id="chipHeart" data-question="Tips menjaga kesehatan jantung melalui olahraga">❤️ Kesehatan Jantung</span>
+            </div>
+          </div>
+
+          <!-- INPUT BOX -->
+          <div class="chat-input-card-xml">
+            <div class="chat-input-row-xml">
+              <input type="text" id="et-message" placeholder="Tulis pesan..." class="chat-edittext-xml" autocomplete="off">
+              <button id="btn-send" class="btn-send-xml">➔</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= EXERCISE RUNNING VIEW (activity_running_countdown.xml) ================= -->
+      <div id="view-exercise-running" class="view hidden splash-bg relative-layout padding-20">
+        <!-- Header -->
+        <h1 class="app-brand-title-countdown" id="tv_countdown_title_running">Running</h1>
+        <p id="tv-running-label" class="exercise-status-subtitle">Siap Lari?</p>
+
+        <!-- Main Counter Circle -->
+        <div class="countdown-container-xml">
+          <div id="circle-running-bg" class="circle-background-xml green-glow-xml"></div>
+          <div class="circle-counter-inner-xml">
+            <span id="tv-running-timer" class="circle-timer-digital-text">00:00</span>
+            <span class="circle-timer-lbl">TIME</span>
+          </div>
+        </div>
+
+        <!-- Stats Container -->
+        <div class="stats-container-xml">
+          <!-- Steps -->
+          <div class="stat-column-xml">
+            <span id="tv-steps-count" class="stat-value-text-xml">0</span>
+            <span class="stat-label-text-xml" id="tv-steps-label">STEPS</span>
+          </div>
+
+          <div class="stats-divider-xml"></div>
+
+          <!-- Distance -->
+          <div class="stat-column-xml">
+            <span id="tv-distance-value" class="stat-value-text-xml">0.00</span>
+            <span class="stat-label-text-xml">KM</span>
+          </div>
+        </div>
+
+        <!-- Simulation Interface on Laptop -->
+        <div class="running-simulation-card-xml">
+          <div class="sim-toggle-row">
+            <label class="switch-xml">
+              <input type="checkbox" id="toggle-run-simulation">
+              <span class="slider-xml round-xml"></span>
+            </label>
+            <span class="sim-toggle-label-text">Simulasi Lari Otomatis</span>
+          </div>
+          <button id="btn-step-simulate" class="btn-step-manual-xml">LANGKAH BARU (SPASI)</button>
+        </div>
+
+        <!-- Buttons Container -->
+        <div class="btn-container-xml">
+          <button id="btn-running-back" class="btn-xml-secondary">KEMBALI</button>
+          <button id="btn-running-start" class="btn-xml-primary">MULAI</button>
+          <button id="btn-running-stop" class="btn-xml-danger hidden">BERHENTI</button>
+          <button id="btn-running-menu" class="btn-xml-secondary hidden">MENU</button>
+        </div>
+
+        <!-- FAB Coach AI -->
+        <button class="fab-coach-ai-countdown-xml" id="fab-running-chatbot">🤖</button>
+      </div>
+
+      <!-- ================= EXERCISE PUSHUP VIEW (activity_pushup_countdown.xml) ================= -->
+      <div id="view-exercise-pushup" class="view hidden splash-bg relative-layout padding-30">
+        <!-- Header -->
+        <h1 class="app-brand-title-countdown" id="tv_countdown_title_pushup">Push-Up</h1>
+
+        <!-- Main Counter Circle -->
+        <div class="countdown-container-xml large-circle">
+          <div id="circle-pushup-bg" class="circle-background-xml green-glow-xml"></div>
+          <span id="tv-pushup-count" class="circle-timer-digital-huge-text">0</span>
+        </div>
+
+        <!-- Labels -->
+        <div class="pushup-labels-container-xml">
+          <p id="tv-pushup-label" class="pushup-status-title-xml">Siap Mulai?</p>
+          <p id="tv-pushup-sub" class="pushup-instruction-sub-xml">Letakkan dada di atas HP / Tekan Spasi</p>
+        </div>
+
+        <!-- Laptop Simulation click zone -->
+        <div id="pushup-click-zone" class="pushup-interactive-zone-xml">
+          <div class="zone-inner-content">
+            <span class="zone-emoji">🎯</span>
+            <span id="tv-pushup-zone-text" class="zone-description-text">Tekan & Tahan Di Sini<br>(Simulasi Dada Turun)</span>
+          </div>
+        </div>
+
+        <!-- Buttons Container -->
+        <div class="btn-container-xml">
+          <button id="btn-pushup-back" class="btn-xml-secondary">KEMBALI</button>
+          <button id="btn-pushup-start" class="btn-xml-primary">MULAI</button>
+          <button id="btn-pushup-restart" class="btn-xml-secondary hidden">MULAI ULANG</button>
+          <button id="btn-pushup-menu" class="btn-xml-secondary hidden">MENU</button>
+        </div>
+
+        <!-- FAB Coach AI -->
+        <button class="fab-coach-ai-countdown-xml" id="fab-pushup-chatbot">🤖</button>
+      </div>
+
+      <!-- ================= EXERCISE YOGA VIEW (activity_yoga_countdown.xml) ================= -->
+      <div id="view-exercise-yoga" class="view hidden splash-bg relative-layout padding-30">
+        <!-- Header -->
+        <h1 class="app-brand-title-countdown" id="tv_countdown_title_yoga">Yoga</h1>
+
+        <!-- Main Counter Circle -->
+        <div class="countdown-container-xml">
+          <div id="circle-yoga-bg" class="circle-background-xml green-glow-xml">
+            <div class="breathing-ring-xml" id="breathing-ring"></div>
+          </div>
+          <div class="circle-counter-inner-xml">
+            <span id="tv-yoga-timer" class="circle-timer-digital-text">00</span>
+            <!-- Pose Image Silhouette placeholder inside circle -->
+            <span id="tv-yoga-silhouette" class="yoga-emoji-inside-circle">🧘</span>
+          </div>
+        </div>
+
+        <!-- Labels -->
+        <div class="yoga-labels-container-xml">
+          <p id="tv-yoga-pose-name" class="yoga-pose-title-xml">Siap Mulai?</p>
+          <p id="tv-yoga-pose-progress" class="yoga-pose-progress-xml">Sesi Yoga Terpandu</p>
+          <p id="tv-yoga-breathing" class="yoga-breathing-guide-xml"></p>
+        </div>
+
+        <!-- Buttons Container -->
+        <div class="btn-container-xml">
+          <button id="btn-yoga-back" class="btn-xml-secondary">KEMBALI</button>
+          <button id="btn-yoga-start" class="btn-xml-primary">MULAI</button>
+          <button id="btn-yoga-restart" class="btn-xml-secondary hidden">MULAI ULANG</button>
+          <button id="btn-yoga-menu" class="btn-xml-secondary hidden">MENU</button>
+        </div>
+
+        <!-- FAB Coach AI -->
+        <button class="fab-coach-ai-countdown-xml" id="fab-yoga-chatbot">🤖</button>
+      </div>
+
+      <!-- ================= GENERAL PURPOSE MODAL ================= -->
+      <div id="modal-container" class="modal-overlay hidden">
+        <!-- Content injected dynamically matching dialog layout XMLs -->
+      </div>
+
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
