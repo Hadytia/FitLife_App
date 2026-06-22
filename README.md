@@ -31,4 +31,6 @@ Interface chatbot dirancang menyerupai aplikasi messaging premium:
 • AI Engine: Groq SDK (Llama 3.1 Model).
 
 Link Scrum Excel Timeline FitLife Apps - 312410358_Hadytia Kuswantoro :
-=> https://drive.google.com/drive/folders/1VJxIrUMZ6TDKUKznjFpbalV6n4QMKB7J?usp=sharing
+UAS => https://drive.google.com/drive/folders/14QibOGgpwCDc-CvO4nY4NUvaM0gJcitj?usp=drive_link
+
+UTS => https://drive.google.com/drive/folders/1VJxIrUMZ6TDKUKznjFpbalV6n4QMKB7J?usp=sharing
